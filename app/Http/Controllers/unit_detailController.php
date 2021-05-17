@@ -31,8 +31,8 @@ class unit_detailController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'tim_id' => 'required',
-            'unit_id' => 'required',
+            /* 'tim_id' => 'required',
+            'unit_id' => 'required', */
         ]);
         $unit_detail = unit_detail::create([
             'tim_id'=> request('tim_id'),
@@ -75,8 +75,8 @@ class unit_detailController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'tim_id' => 'required',
-            'unit_id' => 'required',
+            /* 'tim_id' => 'required',
+            'unit_id' => 'required', */
         ]);
         $unit_detail = unit_detail::findOrFail($id);
         $unit_detail->update($request->all());

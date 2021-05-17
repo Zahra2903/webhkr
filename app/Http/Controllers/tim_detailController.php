@@ -31,7 +31,7 @@ class tim_detailController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'tim_id' => 'required',
+            /* 'tim_id' => 'required', */
             'nik' => 'required',
 
         ]);
@@ -77,7 +77,7 @@ class tim_detailController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'tim_id' => 'required',
+            /* 'tim_id' => 'required', */
             'nik' => 'required',
             
         ]);
