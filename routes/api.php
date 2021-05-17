@@ -5,6 +5,10 @@ use App\Http\Controllers\unitController;
 use App\Http\Controllers\kriteriaController;
 use App\Http\Controllers\kategori_hasilController;
 use App\Http\Controllers\nilaiController;
+use App\Http\Controllers\tim_detailController;
+use App\Http\Controllers\unit_detailController;
+use App\Http\Controllers\penilaianController;
+use App\Http\Controllers\penilaian_detailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +28,10 @@ Route::resource('unit', unitController::class);
 Route::resource('kriteria', kriteriaController::class);
 Route::resource('kategori_hasil', kategori_hasilController::class);
 Route::resource('nilai', nilaiController::class);
+Route::resource('tim_detail', tim_detailController::class);
+Route::resource('unit_detail', unit_detailController::class);
+Route::resource('penilaian', penilaianController::class);
+Route::resource('penilaian_detail', penilaian_detailController::class);
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 

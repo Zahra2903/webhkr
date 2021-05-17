@@ -59,6 +59,30 @@
                             <p>Nilai</p>
                         </router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link  class="nav-link" exact :to="{name:'tim_detail'}" >
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>Tim Detail</p>
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link  class="nav-link" exact :to="{name:'unit_detail'}" >
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>Unit Detail</p>
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link  class="nav-link" exact :to="{name:'penilaian'}" >
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>Penilaian</p>
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link  class="nav-link" exact :to="{name:'penilaian_detail'}" >
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>Penilaian Detail</p>
+                        </router-link>
+                    </li>
                 </ul>
             </nav>
         </div>

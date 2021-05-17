@@ -5,6 +5,10 @@ import Unit from '../views/Unit'
 import Kriteria from '../views/Kriteria'
 import KategoriHasil from '../views/KategoriHasil'
 import Nilai from '../views/Nilai'
+import TimDetail from '../views/TimDetail'
+import UnitDetail from '../views/UnitDetail'
+import Penilaian from '../views/Penilaian'
+import PenilaianDetail from '../views/PenilaianDetail'
 
 export default
 {
@@ -45,6 +49,26 @@ export default
             path:'/nilai',
             name:'nilai',
             component: Nilai,
+        },
+        {
+            path:'/tim_detail',
+            name:'tim_detail',
+            component: TimDetail,
+        },
+        {
+            path:'/unit_detail',
+            name:'unit_detail',
+            component: UnitDetail,
+        },
+        {
+            path:'/penilaian',
+            name:'penilaian',
+            component: Penilaian,
+        },
+        {
+            path:'/penilaian_detail',
+            name:'penilaian_detail',
+            component: PenilaianDetail,
         },
     ]
 }

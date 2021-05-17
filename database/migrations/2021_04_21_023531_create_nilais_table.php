@@ -15,7 +15,7 @@ class CreateNilaisTable extends Migration
     {
         Schema::create('nilais', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kategori_id');
+            $table->foreignId('kriteria_id');
             $table->double('nilai');
             $table->string('keterangan');
             $table->timestamps();

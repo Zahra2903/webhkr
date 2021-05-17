@@ -9,4 +9,13 @@ class kriteria extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
+    public function nilai()
+    {
+        return $this->hasMany(nilai::class); 
+    }
+    public function penilaian_detail()
+    {
+        return $this->hasMany(penilaian_detail::class); 
+    }
 }

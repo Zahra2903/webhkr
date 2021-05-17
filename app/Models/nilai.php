@@ -9,4 +9,9 @@ class nilai extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
+    public function kriteria()
+    {
+        return $this->belongsTo(kriteria::class); 
+    }
 }

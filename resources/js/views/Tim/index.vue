@@ -89,7 +89,7 @@
                   <b-button variant="outline-info" size="sm" @click="openModal('edit' , 'Edit ID : ' +row.item.id, $event.target,row.item)" class="mr-1">
                     <i class="fa fa-edit"></i>
                   </b-button>
-                  <b-button variant="outline-danger" size="sm" @click="deletetim(row.item.id)">
+                  <b-button variant="outline-danger" size="sm" @click="deleteTim(row.item.id)">
                    <i class="fa fa-trash"></i>
                   </b-button>
                 </template>
@@ -113,7 +113,7 @@
               <b-modal @shown="focusMyElement" ref="my-modal" :id="infoModal.id" :title="infoModal.title" @hide="resetInfoModal" hide-footer>
                 <form @submit.prevent="editMode ? update() : store()"> 
                   <div class="modal-body">
-                    <b-form-group id="example-input-group-1" label="Name" label-for="nama_tim">
+                    <b-form-group id="example-input-group-1" label="Nama Tim" label-for="nama_tim">
                       <b-form-input
                         id="nama_tim"
                         name="nama_tim"
@@ -221,7 +221,7 @@ import { required, minLength } from "vuelidate/lib/validators";
         nama_tim: {
           required,
           minLength: minLength(1)
-        }
+        },
       }
     },
     mounted() {
@@ -243,8 +243,8 @@ import { required, minLength } from "vuelidate/lib/validators";
         if(tipe=="edit") {
           this.editMode = true;
           this.form.id =item.id;
-          this.form.nama_tim =item.nama_tim;
-         
+          this.form.nama_tim =item.nama_tim
+
         }
         else {
           this.editMode = false;
@@ -263,8 +263,8 @@ import { required, minLength } from "vuelidate/lib/validators";
       hideModal() {
         this.$refs['my-modal'].hide()
       },
-      validateState(name) {
-        const { $dirty, $error } = this.$v.form[name];
+      validateState(nama_tim) {
+        const { $dirty, $error } = this.$v.form[nama_tim];
         return $dirty ? !$error : null;
       },
       async store() {
@@ -276,7 +276,7 @@ import { required, minLength } from "vuelidate/lib/validators";
             let response =  await axios.post('api/tim',this.form)
              //console.log(response.status);
               if(response.status==200){
-                  this.form.nama_tim = '';
+                  this.form.nama_tim= '';
                   this.hideModal();
                   this.$swal({
                     icon: 'success',
@@ -315,7 +315,7 @@ import { required, minLength } from "vuelidate/lib/validators";
           }
       },
 
-      deletetim(id) { 
+      deleteTim(id) { 
         this.$swal({
           title: 'Are you sure?',
           text: "You won't be able to revert this!",

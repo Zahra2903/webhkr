@@ -9,4 +9,13 @@ class karyawan extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
+    public function penilaian()
+    {
+        return $this->hasMany(penilaian::class); 
+    }
+    public function tim_detail()
+    {
+        return $this->hasMany(tim_detail::class); 
+    }
 }

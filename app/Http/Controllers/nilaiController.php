@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\NilaiResource;
 use App\Models\nilai;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,9 @@ class nilaiController extends Controller
      */
     public function index()
     {
-        //$nilai = nilai::paginate(2);
-        //return $nilai;
-        return nilai::latest()->get();
+        
+        $data = nilai::latest()->get();
+        return NilaiResource::collection($data);
     }
 
     /**
@@ -28,21 +29,21 @@ class nilaiController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'kriteria_id' => 'required',
+            /* 'kriteria_id' => 'required', */
             'nilai' => 'required',
             'keterangan' => 'required',
         ]);
-        $nilai = nilai::create([
+        $data = nilai::create([
             'kriteria_id'=> request('kriteria_id'),
             'nilai'=> request('nilai'),
             'keterangan'=> request('keterangan'),
         ]);
         
-        if($nilai) {
+        if($data) {
             return response()->json([
                 'success' => true,
                 'message' => 'Nilai Created',
-                'data'    => $nilai
+                'data'    => $data
             ], 200);
         }
         //failed save to database
@@ -74,18 +75,18 @@ class nilaiController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'kriteria_id' => 'required',
+           /*  'kriteria_id' => 'required', */
             'nilai' => 'required',
             'keterangan' => 'required',
         ]);
-        $nilai = nilai::findOrFail($id);
-        $nilai->update($request->all());
+        $data = nilai::findOrFail($id);
+        $data->update($request->all());
 
-        if($nilai) {
+        if($data) {
             return response()->json([
                 'success' => true,
                 'message' => 'Nilai Updated',
-                'data'    => $nilai
+                'data'    => $data
             ], 200);
         }
         //failed save to database
@@ -103,8 +104,8 @@ class nilaiController extends Controller
      */
     public function destroy($id)
     {
-        $nilai = nilai::findorfail($id);
-        $nilai->delete();
+        $data = nilai::findorfail($id);
+        $data->delete();
         return response()->json([
             'message' => 'Nilai deleted successfully'
         ]);
