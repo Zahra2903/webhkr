@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\TimDetailResource;
 use App\Models\tim_detail;
+use App\Http\Resources\TimDetailResource;
 use Illuminate\Http\Request;
 
 class tim_detailController extends Controller
@@ -18,8 +18,9 @@ class tim_detailController extends Controller
         //$tim_detail = tim_detail::paginate(2);
         //return $tim_detail;
         //return tim_detail::latest()->get();
-        $tim_detail = tim_detail::latest()->get();
+        $tim_detail = tim_detail::get();
         return TimDetailResource::collection($tim_detail);
+        //return $tim_detail;
     }
 
     /**
@@ -38,9 +39,9 @@ class tim_detailController extends Controller
         $tim_detail = tim_detail::create([
             'tim_id'=> request('tim_id'),
             'nik'=> request('nik'),
-            
+
         ]);
-        
+
         if($tim_detail) {
             return response()->json([
                 'success' => true,
@@ -79,7 +80,7 @@ class tim_detailController extends Controller
         $this->validate($request, [
             /* 'tim_id' => 'required', */
             'nik' => 'required',
-            
+
         ]);
         $tim_detail = tim_detail::findOrFail($id);
         $tim_detail->update($request->all());

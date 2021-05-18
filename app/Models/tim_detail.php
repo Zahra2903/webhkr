@@ -10,12 +10,14 @@ class tim_detail extends Model
     use HasFactory;
     protected $guarded=[];
 
-    public function karyawan()
-    {
-        return $this->belongsTo(karyawan::class); 
-    }
+
     public function tim()
     {
-        return $this->belongsTo(tim::class); 
+        return $this->belongsTo(tim::class);
+    }
+
+    public function karyawan()
+    {
+        return $this->belongsTo(karyawan::class,'nik','nik');
     }
 }

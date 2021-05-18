@@ -304,7 +304,7 @@ import { required, minLength } from "vuelidate/lib/validators";
           this.form.tim_id =item.tim_id;
           this.form.unit_id =item.unit_id;
           
-          this.selectedTim={label:item.tim,value:item.tim_id}
+          this.selectedTim={label:item.nama_tim,value:item.tim_id}
           this.selectedUnit={label:item.unit,value:item.unit_id}
         }
         else {

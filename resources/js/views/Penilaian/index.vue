@@ -8,12 +8,12 @@
                 <h3 class="card-title">
                   Penilaian
                 </h3>
-                
+
               </div>
               <div class="card-body">
               <b-row class="p-20">
                 <b-col>
-                  <b-button variant="outline-success" size="sm" @click="openModal('save' , 'SAVE', $event.target)"> 
+                  <b-button variant="outline-success" size="sm" @click="openModal('save' , 'SAVE', $event.target)">
                   Add New <i class="fas fa-plus"></i>
                   </b-button>
                 </b-col>
@@ -114,7 +114,7 @@
               </b-row>
               <!-- Info modal -->
               <b-modal ref="my-modal" :id="infoModal.id" :title="infoModal.title" @hide="resetInfoModal" hide-footer>
-                <form @submit.prevent="editMode ? update() : store()"> 
+                <form @submit.prevent="editMode ? update() : store()">
                   <div class="modal-body">
                     <b-form-datepicker id="example-datepicker" label="Choose a Date" label-for="tanggal" class="mb-2" v-model="$v.form.tanggal.$model"
                         :state="validateState('tanggal')"></b-form-datepicker>
@@ -203,7 +203,7 @@
                   </div>
                 </form>
               </b-modal>
-              
+
               </div>
             </div>
           </div>
@@ -295,8 +295,8 @@ import { required, minLength } from "vuelidate/lib/validators";
             tdClass:'text-right',
             thClass:'text-center'
           },
-          { 
-            key: 'actions', 
+          {
+            key: 'actions',
             label: 'Actions' ,
             tdClass:'text-center',
             thClass:'text-center'
@@ -354,12 +354,12 @@ import { required, minLength } from "vuelidate/lib/validators";
       this.getUnit();
     },
     methods: {
-    
+
      loadData() {
         axios.get("api/penilaian").then((response) => {
           this.items = Object.values(response.data.data);
           //console.log(Object.values(response.data));
-        }); 
+        });
       },
       getKaryawan()
       {
@@ -370,7 +370,7 @@ import { required, minLength } from "vuelidate/lib/validators";
         });
         this.karyawans=cat;
         //console.log(this.karyawans);
-        }); 
+        });
       },
       getTim()
       {
@@ -380,7 +380,7 @@ import { required, minLength } from "vuelidate/lib/validators";
           return {label:t.nama_tim,value:t.id}
         });
         this.tims=team;
-        }); 
+        });
       },
       getUnit()
       {
@@ -391,7 +391,7 @@ import { required, minLength } from "vuelidate/lib/validators";
         });
         this.units=unt;
         //console.log(this.karyawans);
-        }); 
+        });
       },
 
       openModal(tipe, title, button,item) {
@@ -405,8 +405,8 @@ import { required, minLength } from "vuelidate/lib/validators";
           this.form.unit_id =item.unit_id;
           this.form.status =item.status;
           this.form.rekomendasi =item.rekomendasi;
-          this.selected2={label:item.karyawan,value:item.nik}
-          this.selected1={label:item.tim,value:item.tim_id}
+          this.selected2={label:item.nik+' ( '+item.karyawan+' )',value:item.nik}
+          this.selected1={label:item.nama_tim,value:item.tim_id}
           this.selected3={label:item.unit,value:item.unit_id}
         }
         else {
@@ -417,7 +417,7 @@ import { required, minLength } from "vuelidate/lib/validators";
           this.form.nik ='';
           this.form.tim_id ='';
           this.form.unit_id ='';
-          
+
         }
 
         this.infoModal.title = title
@@ -454,7 +454,7 @@ import { required, minLength } from "vuelidate/lib/validators";
             return;
           }   */
           try {
-            
+
             let response =  await axios.post('api/penilaian',this.form)
              console.log(response);
               if(response.status==200){
@@ -481,7 +481,7 @@ import { required, minLength } from "vuelidate/lib/validators";
         this.form.tim_id = this.selected1.value;
         this.form.nik = this.selected2.value;
         this.form.unit_id = this.selected3.value;
-        
+
         /* this.$v.form.$touch();
           if (this.$v.form.$anyError) {
             return;
@@ -512,7 +512,7 @@ import { required, minLength } from "vuelidate/lib/validators";
         //
       },
 
-      deleteCategory(id) { 
+      deleteCategory(id) {
         this.$swal({
           title: 'Are you sure?',
           text: "You won't be able to revert this!",
@@ -531,7 +531,7 @@ import { required, minLength } from "vuelidate/lib/validators";
               )
               this.loadData();
                });
-            
+
           }
         })
       },

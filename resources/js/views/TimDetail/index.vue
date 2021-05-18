@@ -8,12 +8,12 @@
                 <h3 class="card-title">
                   Tim Detail
                 </h3>
-                
+
               </div>
               <div class="card-body">
               <b-row class="p-20">
                 <b-col>
-                  <b-button variant="outline-success" size="sm" @click="openModal('save' , 'SAVE', $event.target)"> 
+                  <b-button variant="outline-success" size="sm" @click="openModal('save' , 'SAVE', $event.target)">
                   Add New <i class="fas fa-plus"></i>
                   </b-button>
                 </b-col>
@@ -114,7 +114,7 @@
               </b-row>
               <!-- Info modal -->
               <b-modal ref="my-modal" :id="infoModal.id" :title="infoModal.title" @hide="resetInfoModal" hide-footer>
-                <form @submit.prevent="editMode ? update() : store()"> 
+                <form @submit.prevent="editMode ? update() : store()">
                   <div class="modal-body">
                     <b-form-group id="timgroup" label="Tim" label-for="tim_id">
                       <v-select v-model="selectedTim"  :options="tims">
@@ -156,7 +156,7 @@
                   </div>
                 </form>
               </b-modal>
-              
+
               </div>
             </div>
           </div>
@@ -225,8 +225,8 @@ import { required, minLength } from "vuelidate/lib/validators";
             tdClass:'text-right',
             thClass:'text-center'
           },
-          { 
-            key: 'actions', 
+          {
+            key: 'actions',
             label: 'Actions' ,
             tdClass:'text-center',
             thClass:'text-center'
@@ -246,7 +246,7 @@ import { required, minLength } from "vuelidate/lib/validators";
           id : '',
           tim_id:'',
           nik : '',
-          
+
         },
       }
     },
@@ -267,12 +267,12 @@ import { required, minLength } from "vuelidate/lib/validators";
       this.getKaryawan();
     },
     methods: {
-    
+
      loadData() {
         axios.get("api/tim_detail").then((response) => {
           this.items = Object.values(response.data.data);
-          //console.log(Object.values(response.data));
-        }); 
+          //console.log(Object.values(response.data.data));
+        });
       },
       getTim()
       {
@@ -282,7 +282,7 @@ import { required, minLength } from "vuelidate/lib/validators";
           return {label:t.nama_tim,value:t.id}
         });
         this.tims=team;
-        }); 
+        });
       },
       getKaryawan()
       {
@@ -293,7 +293,7 @@ import { required, minLength } from "vuelidate/lib/validators";
         });
         this.karyawans=cat;
         //console.log(this.karyawans);
-        }); 
+        });
       },
 
       openModal(tipe, title, button,item) {
@@ -303,9 +303,9 @@ import { required, minLength } from "vuelidate/lib/validators";
           this.form.id =item.id;
           this.form.tim_id =item.tim_id;
           this.form.nik =item.nik;
-          
-          this.selectedTim={label:item.tim,value:item.tim_id}
-          this.selectedKaryawan={label:item.karyawan,value:item.nik}
+
+          this.selectedTim={label:item.nama_tim,value:item.tim_id}
+          this.selectedKaryawan={label:item.nik+' ( '+item.karyawan+' )',value:item.nik}
         }
         else {
           this.editMode = false;
@@ -336,7 +336,7 @@ import { required, minLength } from "vuelidate/lib/validators";
             return;
           }   */
           try {
-            
+
             let response =  await axios.post('api/tim_detail',this.form)
              console.log(response);
               if(response.status==200){
@@ -358,7 +358,7 @@ import { required, minLength } from "vuelidate/lib/validators";
         let id = this.form.id;
         this.form.tim_id = this.selectedTim.value;
         this.form.nik = this.selectedKaryawan.value;
-        
+
         /* this.$v.form.$touch();
           if (this.$v.form.$anyError) {
             return;
@@ -386,7 +386,7 @@ import { required, minLength } from "vuelidate/lib/validators";
         //
       },
 
-      deleteCategory(id) { 
+      deleteCategory(id) {
         this.$swal({
           title: 'Are you sure?',
           text: "You won't be able to revert this!",
@@ -405,7 +405,7 @@ import { required, minLength } from "vuelidate/lib/validators";
               )
               this.loadData();
                });
-            
+
           }
         })
       },

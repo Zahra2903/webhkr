@@ -31,8 +31,8 @@ class penilaian_detailController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'kriteria_id' => 'required',
-            'penilaian_id' => 'required',
+            /* 'kriteria_id' => 'required',
+            'penilaian_id' => 'required', */
             'nilai' => 'required',
         ]);
         $penilaian_detail = penilaian_detail::create([
@@ -40,7 +40,7 @@ class penilaian_detailController extends Controller
             'penilaian_id'=> request('penilaian_id'),
             'nilai'=> request('nilai'),
         ]);
-        
+
         if($penilaian_detail) {
             return response()->json([
                 'success' => true,
@@ -77,8 +77,8 @@ class penilaian_detailController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'kriteria_id' => 'required',
-            'penilaian_id' => 'required',
+            /* 'kriteria_id' => 'required',
+            'penilaian_id' => 'required', */
             'nilai' => 'required',
         ]);
         $penilaian_detail = penilaian_detail::findOrFail($id);

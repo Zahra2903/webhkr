@@ -6,14 +6,14 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
-                  Penilaian
+                  Penilaian Detail
                 </h3>
-                
+
               </div>
               <div class="card-body">
               <b-row class="p-20">
                 <b-col>
-                  <b-button variant="outline-success" size="sm" @click="openModal('save' , 'SAVE', $event.target)"> 
+                  <b-button variant="outline-success" size="sm" @click="openModal('save' , 'SAVE', $event.target)">
                   Add New <i class="fas fa-plus"></i>
                   </b-button>
                 </b-col>
@@ -114,7 +114,7 @@
               </b-row>
               <!-- Info modal -->
               <b-modal @shown="focusMyElement" ref="my-modal" :id="infoModal.id" :title="infoModal.title" @hide="resetInfoModal" hide-footer>
-                <form @submit.prevent="editMode ? update() : store()"> 
+                <form @submit.prevent="editMode ? update() : store()">
                   <div class="modal-body">
                     <b-form-group id="kriteriagroup" label="Kriteria Id" label-for="kriteria_id">
                       <v-select v-model="selected1"  :options="kriterias">
@@ -150,7 +150,6 @@
                         name="nilai"
                         ref="nilaiReff"
                         v-model="$v.form.nilai.$model"
-                        :state="validateState('nilai')"
                         aria-describedby="input-1-live-feedback"
                       ></b-form-input>
 
@@ -159,7 +158,7 @@
                       >This is a required field.
                       </b-form-invalid-feedback>
                     </b-form-group>
-                   
+
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-danger" @click="hideModal" >
@@ -174,7 +173,7 @@
                   </div>
                 </form>
               </b-modal>
-              
+
               </div>
             </div>
           </div>
@@ -247,8 +246,8 @@ import { required, minLength } from "vuelidate/lib/validators";
             tdClass:'text-right',
             thClass:'text-center'
           },
-          { 
-            key: 'actions', 
+          {
+            key: 'actions',
             label: 'Actions' ,
             tdClass:'text-center',
             thClass:'text-center'
@@ -269,7 +268,7 @@ import { required, minLength } from "vuelidate/lib/validators";
           kriteria_id:'',
           penilaian_id:'',
           nilai : '',
-          
+
         },
       }
     },
@@ -293,12 +292,12 @@ import { required, minLength } from "vuelidate/lib/validators";
       this.getPenilaian();
     },
     methods: {
-    
+
      loadData() {
         axios.get("api/penilaian_detail").then((response) => {
           this.items = Object.values(response.data.data);
           //console.log(Object.values(response.data.data));
-        }); 
+        });
       },
       getKriteria()
       {
@@ -308,17 +307,18 @@ import { required, minLength } from "vuelidate/lib/validators";
           return {label:t.kriteria,value:t.id}
         });
         this.kriterias=krt;
-        }); 
+        //console.log(this.krt);
+        });
       },
       getPenilaian()
       {
         axios.get("api/penilaian").then((response) => {
-        this.penilaians = Object.values(response.data);
+        this.penilaians = Object.values(response.data.data);
         let cat=$.map(this.penilaians,function(t){
-          return {label:t.status,value:t.id}
+          return {label:t.tanggal+' ( '+t.unit+' )',value:t.id}
         });
-        this.kriterias=cat;
-        }); 
+        this.penilaians=cat;
+        });
       },
 
       openModal(tipe, title, button,item) {
@@ -329,10 +329,10 @@ import { required, minLength } from "vuelidate/lib/validators";
           this.form.nilai =item.nilai;
           this.form.penilaian_id =item.penilaian_id;
           this.form.kriteria_id =item.kriteria_id;
-          
+
           this.selected1={label:item.kriteria,value:item.kriteria_id}
           this.selected2={label:item.penilaian,value:item.penilaian_id}
-          
+
         }
         else {
           this.editMode = false;
@@ -363,7 +363,7 @@ import { required, minLength } from "vuelidate/lib/validators";
             return;
           } */
           try {
-            
+
             let response =  await axios.post('api/penilaian_detail',this.form)
              //console.log(response.status);
               if(response.status==200){
@@ -386,7 +386,7 @@ import { required, minLength } from "vuelidate/lib/validators";
         let id = this.form.id;
         this.form.kriteria_id = this.selected1.value;
         this.form.penilaian_id = this.selected2.value;
-        
+
         /* this.$v.form.$touch();
           if (this.$v.form.$anyError) {
             return;
@@ -415,7 +415,7 @@ import { required, minLength } from "vuelidate/lib/validators";
 
       },
 
-      deleteCategory(id) { 
+      deleteCategory(id) {
         this.$swal({
           title: 'Are you sure?',
           text: "You won't be able to revert this!",
@@ -434,7 +434,7 @@ import { required, minLength } from "vuelidate/lib/validators";
               )
               this.loadData();
             });
-            
+
           }
         })
       },

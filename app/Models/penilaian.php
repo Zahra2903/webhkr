@@ -12,19 +12,19 @@ class penilaian extends Model
 
     public function penilaian_detail()
     {
-        return $this->hasMany(penilaian_detail::class); 
+        return $this->hasMany(penilaian_detail::class);
     }
     public function karyawan()
     {
-        return $this->belongsTo(karyawan::class); 
+        return $this->belongsTo(karyawan::class,'nik','nik');
     }
     public function tim()
     {
-        return $this->belongsTo(tim::class); 
+        return $this->belongsTo(tim::class);
     }
     public function unit()
     {
-        return $this->belongsTo(unit::class); 
+        return $this->belongsTo(unit::class);
     }
 
 }

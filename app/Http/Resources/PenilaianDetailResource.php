@@ -19,7 +19,7 @@ class PenilaianDetailResource extends JsonResource
             'kriteria_id' => $this->kriteria_id,
             'kriteria' => $this->kriteria->kriteria,
             'penilaian_id' => $this->penilaian_id,
-            'penilaian' => $this->penilaian->status,
+            'penilaian' => $this->penilaian->tanggal,
             'nilai' => $this->nilai,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

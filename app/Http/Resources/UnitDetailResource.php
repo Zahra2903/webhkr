@@ -17,9 +17,9 @@ class UnitDetailResource extends JsonResource
         return [
             'id' => $this->id,
             'tim_id' => $this->tim_id,
-            'nama_tim' => $this->tim,
+            'nama_tim' => $this->tim->nama_tim,
             'unit_id' => $this->unit_id,
-            'unit' => $this->unit,
+            'unit' => $this->unit->nama,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

@@ -12,10 +12,11 @@ class karyawan extends Model
 
     public function penilaian()
     {
-        return $this->hasMany(penilaian::class); 
+        return $this->hasMany(penilaian::class);
     }
+
     public function tim_detail()
     {
-        return $this->hasMany(tim_detail::class); 
+        return $this->hasMany(tim_detail::class);
     }
 }
