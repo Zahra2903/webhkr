@@ -16,7 +16,7 @@ class tim extends Model
     }
     public function tim_detail()
     {
-        return $this->hasMany(tim_detail::class); 
+        return $this->hasMany(tim_detail::class,'tim_id','id'); 
     }
     public function unit_detail()
     {

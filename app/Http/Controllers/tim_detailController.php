@@ -31,18 +31,17 @@ class tim_detailController extends Controller
      */
     public function store(Request $request)
     {
+        
         request()->validate([
-            /* 'tim_id' => 'required', */
             'nik' => 'required',
-
         ]);
+
         $tim_detail = tim_detail::create([
-            'tim_id'=> request('tim_id'),
-            'nik'=> request('nik'),
-
+            'tim_id' => request('tim_id'),
+            'nik' => request('nik'),
         ]);
 
-        if($tim_detail) {
+        if ($tim_detail) {
             return response()->json([
                 'success' => true,
                 'message' => 'Tim Detail Created',
@@ -54,7 +53,7 @@ class tim_detailController extends Controller
             'success' => false,
             'message' => 'Tim Detail Failed to Save',
         ], 409);
-
+       
     }
 
     /**
@@ -65,7 +64,21 @@ class tim_detailController extends Controller
      */
     public function show($id)
     {
-        return tim_detail::findorFail($id);
+       
+        $cek = tim_detail::where('nik', $id)->get();
+        if($cek->isEmpty())
+        {
+            return response()->json([
+                'success' => true,
+            ], 200);
+        }
+        else 
+        {
+            return response()->json([
+                'success' => false,
+            ], 200);
+        }
+
     }
 
     /**

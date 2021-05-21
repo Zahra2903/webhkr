@@ -193,18 +193,6 @@ import { required, minLength } from "vuelidate/lib/validators";
             key: 'sub_kriteria',
             sortable: true
           },
-          {
-            key: 'created_at',
-            sortable: true,
-            tdClass:'text-right',
-            thClass:'text-center'
-          },
-          {
-            key: 'updated_at',
-            sortable: true,
-            tdClass:'text-right',
-            thClass:'text-center'
-          },
           { 
             key: 'actions', 
             label: 'Actions' ,

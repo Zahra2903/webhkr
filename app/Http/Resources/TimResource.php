@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Models\karyawan;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TimDetailResource extends JsonResource
+class TimResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,13 +18,8 @@ class TimDetailResource extends JsonResource
         return
         [
             'id' => $this->id,
-            'tim_id' => $this->tim_id,
-            'nama_tim' => $this->tim->nama_tim,
-            'nik' =>$this->nik,
-            'karyawan' =>$this->karyawan->nama,
-            'unit' =>$this->karyawan->unit,
-            'created_at' =>$this->created_at,
-            'updated_at' =>$this->updated_at,
+            'nama_tim' => $this->nama_tim,
+            'tim_detail' => TimDetailResource::collection($this->tim_detail)
 
         ];
     }

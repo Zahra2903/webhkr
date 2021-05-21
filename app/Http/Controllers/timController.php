@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TimResource;
 use App\Models\tim;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,8 @@ class timController extends Controller
      */
     public function index()
     {
-        //$tim = tim::paginate(2);
-        //return $tim;
-        return tim::latest()->get();
+        $tim = tim::latest()->get();
+        return TimResource::collection($tim);
     }
 
     /**

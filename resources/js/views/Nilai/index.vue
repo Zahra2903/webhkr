@@ -300,7 +300,7 @@ import { required, minLength } from "vuelidate/lib/validators";
         axios.get("api/kriteria").then((response) => {
         this.kriterias = Object.values(response.data);
         let cat=$.map(this.kriterias,function(t){
-          return {label:t.kriteria,value:t.id}
+          return {label:t.kriteria+' - '+t.sub_kriteria,value:t.id}
         });
         this.kriterias=cat;
         }); 

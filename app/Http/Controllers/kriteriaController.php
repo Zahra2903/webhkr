@@ -16,7 +16,7 @@ class kriteriaController extends Controller
     {
         //$kriteria = kriteria::paginate(2);
         //return $kriteria;
-        return kriteria::latest()->get();
+        return kriteria::get();
     }
 
     /**

@@ -24,31 +24,31 @@
                     <li class=nav-header>Master</li>
                     <li class="nav-item">
                         <router-link  class="nav-link" exact :to="{name:'karyawan'}" >
-                            <i class="nav-icon fas fa-copy"></i>
+                            <i class="nav-icon fas fa-users"></i>
                             <p>Karyawan</p>
                         </router-link>
                     </li>
                     <li class="nav-item">
                         <router-link  class="nav-link" exact :to="{name:'tim'}" >
-                            <i class="nav-icon fas fa-copy"></i>
+                            <i class="nav-icon fas fa-users-cog"></i>
                             <p>Tim</p>
                         </router-link>
                     </li>
                     <li class="nav-item">
                         <router-link  class="nav-link" exact :to="{name:'unit'}" >
-                            <i class="nav-icon fas fa-copy"></i>
+                            <i class="nav-icon fas fa-building"></i>
                             <p>Unit</p>
                         </router-link>
                     </li>
                     <li class="nav-item">
                         <router-link  class="nav-link" exact :to="{name:'kriteria'}" >
-                            <i class="nav-icon fas fa-copy"></i>
+                            <i class="nav-icon fas fa-book"></i>
                             <p>Kriteria</p>
                         </router-link>
                     </li>
                     <li class="nav-item">
                         <router-link  class="nav-link" exact :to="{name:'kategori_hasil'}" >
-                            <i class="nav-icon fas fa-copy"></i>
+                            <i class="nav-icon fas fa-stream"></i>
                             <p>Kategori Hasil</p>
                         </router-link>
                     </li>
@@ -59,12 +59,12 @@
                             <p>Nilai</p>
                         </router-link>
                     </li>
-                    <li class="nav-item">
+                  <!--   <li class="nav-item">
                         <router-link  class="nav-link" exact :to="{name:'tim_detail'}" >
                             <i class="nav-icon fas fa-copy"></i>
                             <p>Tim Detail</p>
                         </router-link>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <router-link  class="nav-link" exact :to="{name:'unit_detail'}" >
                             <i class="nav-icon fas fa-copy"></i>

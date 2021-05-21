@@ -277,7 +277,7 @@ import { required, minLength } from "vuelidate/lib/validators";
       getTim()
       {
         axios.get("api/tim").then((response) => {
-        this.tims = Object.values(response.data);
+        this.tims = Object.values(response.data.data);
         let team=$.map(this.tims,function(t){
           return {label:t.nama_tim,value:t.id}
         });

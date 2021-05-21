@@ -74,12 +74,6 @@
               <template #cell(no)="row">
                 {{ row.index + 1 }}
               </template>
-              <!-- <template #cell(created_at)="row">
-                {{ row.item.created_at | formatDate}}
-              </template>
-              <template #cell(updated_at)="row">
-                {{ row.item.updated_at | formatDate}}
-              </template> -->
               </b-table>
 
               <b-row>
@@ -130,59 +124,28 @@ import { required, minLength } from "vuelidate/lib/validators";
             sortable: true
           },
           {
+            key: 'nip',
+            sortable: true
+          },
+          {
             key: 'nama',
             sortable: true
           },
            {
-            key: 'tgl_lahir',
+            key: 'unit',
             sortable: true
           },
-          /* {
-            key: 'created_at',
-            sortable: true,
-            tdClass:'text-right',
-            thClass:'text-center'
-          },
-          {
-            key: 'updated_at',
-            sortable: true,
-            tdClass:'text-right',
-            thClass:'text-center'
-          }, */
-          { 
-            key: 'actions', 
-            label: 'Actions' ,
-            tdClass:'text-center',
-            thClass:'text-center'
-          }
         ],
         headvariant:'dark',
         transProps: {
           name: 'flip-list'
         },
-        /* sortBy: 'created_at', */
-        sortBy: 'no',
-        sortDesc: true,
-        infoModal: {
-          id: 'info-modal',
-          title: '',
-        },
+        sortBy: 'nama',
+        sortDesc: false,
         form: {
           id : '',
           nama : '',
           tgl_lahir : '',
-        },
-      }
-    },
-    validations: {
-      form: {
-        nama: {
-          required,
-          minLength: minLength(1)
-        },
-        tgl_lahir: {
-          required,
-          minLength: minLength(1)
         },
       }
     },
@@ -193,12 +156,7 @@ import { required, minLength } from "vuelidate/lib/validators";
      loadData() {
         axios.get("api/karyawan").then((response) => {
           this.items = Object.values(response.data);
-          //console.log(Object.values(response.data));
         }); 
-      },
-      focusMyElement()
-      {
-         this.$refs.namaReff.focus();
       },
     },
     computed: {

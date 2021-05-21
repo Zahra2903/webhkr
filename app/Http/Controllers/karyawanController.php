@@ -16,7 +16,7 @@ class karyawanController extends Controller
     {
         //$karyawan = karyawan::paginate(2);
         //return $karyawan;
-        return karyawan::latest()->get();
+        return karyawan::orderBy('nama','asc')->get();
     }
     
     /**
