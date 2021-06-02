@@ -18,7 +18,7 @@ class unit_detailController extends Controller
         //$unit_detail = unit_detail::paginate(2);
         //return $unit_detail;
         //return unit_detail::latest()->get();
-        $unit_detail = unit_detail::latest()->get();
+        $unit_detail = unit_detail::get();
         return UnitDetailResource::collection($unit_detail);
     }
 

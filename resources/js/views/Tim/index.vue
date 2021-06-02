@@ -101,6 +101,27 @@
                           </tr>
                         </tbody>
                       </table>
+                      <table class="table">
+                        <thead>
+                          <tr>
+                              <th>No</th>
+                              <th>Nama Unit</th>
+                              <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="(value, key) in row.item.unit_detail" :key="key">
+                            <td>{{key + 1 }}</td>
+                            <td>{{value.unit }}</td>
+                            <td>
+                              <b-button variant="outline-danger" size="sm" @click="deleteUnitDetail(value.id)">
+                                <i class="fa fa-trash"></i>
+                                </b-button>
+                              </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                    <!--  {{
                       row.item.tim_detail
@@ -188,7 +209,23 @@
                           />
                         </template>
                     </v-select>
-                  </b-form-group>
+                    </b-form-group>
+                </div>
+                <form @submit.prevent="store3()" > 
+                  <div class="modal-body">
+                  <b-form-group id="unitgroup" label="Unit ID" label-for="unit_id">
+                      <v-select v-model="selectedUnit"  :options="units">
+                        <template #search="{attributes, events}">
+                            <input
+                              class="vs__search"
+                              :required="!selectedUnit"
+                              v-bind="attributes"
+                              v-on="events"
+                              ref="unitReff"
+                            />
+                          </template>
+                      </v-select>
+                    </b-form-group>
                 </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">
@@ -198,6 +235,7 @@
                     Close
                   </button>
                 </div>
+                </form>
                 </form>
                 </div>
               </b-modal>
@@ -212,7 +250,6 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, minLength } from "vuelidate/lib/validators";
-
   export default {
     mixins: [validationMixin],
     data() {
@@ -227,6 +264,8 @@ import { required, minLength } from "vuelidate/lib/validators";
         items: [],
         selectedKaryawan:"",
         karyawans:[],
+        selectedUnit:"",
+        units:[],
         fields: [
           {
             key: 'no',
@@ -263,6 +302,7 @@ import { required, minLength } from "vuelidate/lib/validators";
         form2: {
           nik:'',
           tim_id : '',
+          unit_id : '',
         },
       }
     },
@@ -277,6 +317,7 @@ import { required, minLength } from "vuelidate/lib/validators";
     mounted() {
       this.loadData();
       this.getKaryawan();
+      this.getUnit();
     },
     methods: {
      loadData() {
@@ -295,11 +336,20 @@ import { required, minLength } from "vuelidate/lib/validators";
         //console.log(this.karyawans);
         });
       },
+      getUnit(){
+        axios.get("api/unit").then((response) => {
+        this.units = Object.values(response.data);
+        let unt=$.map(this.units,function(t){
+          return {label:t.nama,value:t.unit_id}
+        });
+        this.units=unt;
+        //console.log(this.units);
+        });
+      },
       focusMyElement()
       {
-         this.detailMode ? this.$refs.karyawanReff.focus(): this.$refs.nama_timReff.focus();
+         this.detailMode ? this.$refs.karyawanReff.focus():  this.$refs.nama_timReff.focus();
       },
-
       openModal(tipe, title, button,item) {
         if(tipe=="edit") {
           this.editMode = true;
@@ -313,14 +363,15 @@ import { required, minLength } from "vuelidate/lib/validators";
           this.detailMode = true;
           this.form2.tim_id = item.id;
           this.form2.nik ='';
+          this.form2.unit_id ='';
           this.selectedKaryawan ='';
+          this.selectedUnit ='';
         }
         else {
           this.editMode = false;
           this.detailMode = false;
           this.form.nama_tim ='';
         }
-
         this.infoModal.title = title
         this.$root.$emit('bv::show::modal', this.infoModal.id, button)
       },
@@ -358,7 +409,6 @@ import { required, minLength } from "vuelidate/lib/validators";
             console.log(e.response.data.errors);
           }
       },
-
       async store2() {
          this.form2.nik = this.selectedKaryawan.value;
           let cek = await axios.get('api/tim_detail/'+this.form2.nik);
@@ -390,7 +440,37 @@ import { required, minLength } from "vuelidate/lib/validators";
           }
          
       },
-
+      async store3() {
+         this.form2.unit_id = this.selectedUnit.value;
+          let cek = await axios.get('api/unit_detail/'+this.form2.unit_id);
+          //console.log(cek.data.success);
+          if(cek.data.success==false){
+             this.$swal({
+                icon: 'error',
+                title: 'Data Sudah Ada ! ! !'
+              });
+          }
+          else {
+             try {
+              let response =  await axios.post('api/unit_detail',this.form2)
+              //console.log(response);
+                if(response.status==200){
+                    this.form2.unit_id = '';
+                    this.form2.tim_id = '';
+                
+                    this.hideModal();
+                    this.$swal({
+                      icon: 'success',
+                      title: 'Unit Detail Added successfully'
+                    });
+                    this.loadData();
+                }
+            } catch (e) {
+              console.log(e.response.data.errors);
+            }
+          }
+         
+      },
       async update() {
         this.$v.form.$touch();
           if (this.$v.form.$anyError) {
@@ -416,7 +496,6 @@ import { required, minLength } from "vuelidate/lib/validators";
             this.theErrors = e.response.data.errors ;
           }
       },
-
       deleteTim(id) { 
         this.$swal({
           title: 'Are you sure?',
@@ -440,7 +519,7 @@ import { required, minLength } from "vuelidate/lib/validators";
           }
         })
       },
-       deleteTimDetail(id) { 
+      deleteTimDetail(id) { 
         this.$swal({
           title: 'Are you sure?',
           text: "You won't be able to revert this!",
@@ -452,6 +531,29 @@ import { required, minLength } from "vuelidate/lib/validators";
         }).then((result) => {
           if (result.isConfirmed) {
             axios.delete("api/tim_detail/"+id).then(response => {
+              this.$swal(
+                  'Deleted!',
+                  'Your file has been deleted.',
+                  'success'
+              )
+              this.loadData();
+            });
+            
+          }
+        })
+      },
+      deleteUnitDetail(id) { 
+        this.$swal({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            axios.delete("api/unit_detail/"+id).then(response => {
               this.$swal(
                   'Deleted!',
                   'Your file has been deleted.',
