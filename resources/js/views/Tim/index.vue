@@ -194,10 +194,10 @@
                 </form>
                 </div>
 
-                <div v-else>
+                <div v-else-if>
                 <form @submit.prevent="store2()" > 
                   <div class="modal-body">
-                    <b-form-group id="karyawangroup" label="Nik" label-for="nik">
+                    <b-form-group id="karyawangroup" label="NIK" label-for="nik">
                     <v-select v-model="selectedKaryawan"  :options="karyawans">
                       <template #search="{attributes, events}">
                           <input
@@ -210,10 +210,22 @@
                         </template>
                     </v-select>
                     </b-form-group>
+                  </div>
+                  <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">
+                    Add
+                  </button>
+                  <button type="button" class="btn btn-danger" @click="hideModal" >
+                    Close
+                  </button>
+                  </div>
+                </form>
                 </div>
+
+                <div v-else-if>
                 <form @submit.prevent="store3()" > 
                   <div class="modal-body">
-                  <b-form-group id="unitgroup" label="Unit ID" label-for="unit_id">
+                  <b-form-group id="unitgroup" label="Unit" label-for="unit_id">
                       <v-select v-model="selectedUnit"  :options="units">
                         <template #search="{attributes, events}">
                             <input
@@ -235,7 +247,6 @@
                     Close
                   </button>
                 </div>
-                </form>
                 </form>
                 </div>
               </b-modal>
