@@ -65,12 +65,12 @@
                             <p>Tim Detail</p>
                         </router-link>
                     </li> -->
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <router-link  class="nav-link" exact :to="{name:'unit_detail'}" >
                             <i class="nav-icon fas fa-copy"></i>
                             <p>Unit Detail</p>
                         </router-link>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <router-link  class="nav-link" exact :to="{name:'penilaian'}" >
                             <i class="nav-icon fas fa-copy"></i>

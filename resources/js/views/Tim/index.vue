@@ -138,6 +138,10 @@
                    <b-button variant="outline-success" size="sm" @click="openModal('tambahdetail' , 'Tambah Tim', $event.target,row.item)" class="mr-1">
                     <i class="fa fa-plus"></i>
                   </b-button>
+                   <b-button variant="outline-primary" size="sm" @click="openModal('tambahunit' , 'Tambah Unit', $event.target,row.item)" class="mr-1">
+                    <i class="fa fa-plus"></i>
+                  </b-button>
+
                   <b-button variant="outline-warning" size="sm" @click="openModal('edit' , 'Edit ID : ' +row.item.id, $event.target, row.item)" class="mr-1">
                     <i class="fa fa-edit"></i>
                   </b-button>
@@ -161,7 +165,7 @@
               </b-row>
               <!-- Info modal -->
               <b-modal @shown="focusMyElement" ref="my-modal" :id="infoModal.id" :title="infoModal.title" @hide="resetInfoModal" hide-footer>
-                <div v-if="!detailMode && (!editMode || editMode)">
+                <div v-if="!unitMode && !karyawanMode">
                 <form @submit.prevent="editMode ? update() : store()" > 
                   <div class="modal-body">
                         <b-form-group id="example-input-group-1" label="Nama Tim" label-for="nama_tim">
@@ -194,7 +198,7 @@
                 </form>
                 </div>
 
-                <div v-else-if>
+                <div v-else-if= karyawanMode and !unitMode>
                 <form @submit.prevent="store2()" > 
                   <div class="modal-body">
                     <b-form-group id="karyawangroup" label="NIK" label-for="nik">
@@ -222,7 +226,7 @@
                 </form>
                 </div>
 
-                <div v-else-if>
+                <div v-else-if= !karyawanMode and unitMode>
                 <form @submit.prevent="store3()" > 
                   <div class="modal-body">
                   <b-form-group id="unitgroup" label="Unit" label-for="unit_id">
@@ -268,6 +272,8 @@ import { required, minLength } from "vuelidate/lib/validators";
         perPage: 10,
         editMode:false,
         detailMode:false,
+        karyawanMode:false,
+        unitMode:false,
         loading:false,
         pageOptions: [1, 5, 10, 15, { value: 100, text: "All" }],
         currentPage: 1,
@@ -312,6 +318,9 @@ import { required, minLength } from "vuelidate/lib/validators";
         },
         form2: {
           nik:'',
+          tim_id : '',
+        },
+        form3: {
           tim_id : '',
           unit_id : '',
         },
@@ -359,7 +368,7 @@ import { required, minLength } from "vuelidate/lib/validators";
       },
       focusMyElement()
       {
-         this.detailMode ? this.$refs.karyawanReff.focus():  this.$refs.nama_timReff.focus();
+        // this.detailMode ? this.$refs.karyawanReff.focus():  this.$refs.nama_timReff.focus();
       },
       openModal(tipe, title, button,item) {
         if(tipe=="edit") {
@@ -376,6 +385,16 @@ import { required, minLength } from "vuelidate/lib/validators";
           this.form2.nik ='';
           this.form2.unit_id ='';
           this.selectedKaryawan ='';
+         // this.selectedUnit ='';
+        }
+        else if(tipe=="tambahunit")
+        {
+          this.editMode = false;
+          this.detailMode = false;
+          this.karyawanMode = false;
+          this.unitMode = true;
+          this.form3.tim_id = item.id;
+          this.form3.unit_id ='';
           this.selectedUnit ='';
         }
         else {
@@ -452,8 +471,10 @@ import { required, minLength } from "vuelidate/lib/validators";
          
       },
       async store3() {
-         this.form2.unit_id = this.selectedUnit.value;
-          let cek = await axios.get('api/unit_detail/'+this.form2.unit_id);
+        
+         this.form3.unit_id = this.selectedUnit.value;
+         console.log(this.selectedUnit.value);
+          let cek = await axios.get('api/unit_detail/'+this.form3.unit_id);
           //console.log(cek.data.success);
           if(cek.data.success==false){
              this.$swal({
@@ -463,11 +484,11 @@ import { required, minLength } from "vuelidate/lib/validators";
           }
           else {
              try {
-              let response =  await axios.post('api/unit_detail',this.form2)
-              //console.log(response);
+              let response =  await axios.post('api/unit_detail',this.form3)
+              console.log(response);
                 if(response.status==200){
-                    this.form2.unit_id = '';
-                    this.form2.tim_id = '';
+                    this.form3.unit_id = '';
+                    this.form3.tim_id = '';
                 
                     this.hideModal();
                     this.$swal({

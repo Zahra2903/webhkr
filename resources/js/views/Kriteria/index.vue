@@ -181,10 +181,10 @@ import { required, minLength } from "vuelidate/lib/validators";
             tdClass:'text-center',
             thClass:'text-center'
           },
-          {
+          /* {
             key: 'id',
             sortable: true
-          },
+          }, */
           {
             key: 'kriteria',
             sortable: true

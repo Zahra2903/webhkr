@@ -209,10 +209,10 @@ import { required, minLength } from "vuelidate/lib/validators";
             tdClass:'text-center',
             thClass:'text-center'
           },
-          {
+          /* {
             key: 'id',
             sortable: true
-          },
+          }, */
           {
             key: 'kriteria_id',
             sortable: true
@@ -230,7 +230,7 @@ import { required, minLength } from "vuelidate/lib/validators";
             key: 'keterangan',
             sortable: true
           },
-          {
+          /* {
             key: 'created_at',
             sortable: true,
             tdClass:'text-right',
@@ -241,7 +241,7 @@ import { required, minLength } from "vuelidate/lib/validators";
             sortable: true,
             tdClass:'text-right',
             thClass:'text-center'
-          },
+          }, */
           { 
             key: 'actions', 
             label: 'Actions' ,
