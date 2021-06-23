@@ -8,6 +8,7 @@ import Nilai from '../views/Nilai'
 import TimDetail from '../views/TimDetail'
 import UnitDetail from '../views/UnitDetail'
 import Penilaian from '../views/Penilaian'
+import PenilaianCreate from '../views/Penilaian/Create'
 import PenilaianDetail from '../views/PenilaianDetail'
 
 export default
@@ -64,6 +65,11 @@ export default
             path:'/penilaian',
             name:'penilaian',
             component: Penilaian,
+        },
+        {
+            path:'/penilaian/create',
+            name:'penilaian.create',
+            component: PenilaianCreate,
         },
         {
             path:'/penilaian_detail',

@@ -13,7 +13,7 @@
               <div class="card-body">
               <b-row class="p-20">
                 <b-col>
-                  <b-button variant="outline-success" size="sm" @click="openModal('save' , 'SAVE', $event.target)">
+                  <b-button variant="outline-success" size="sm" :to="{name:'penilaian.create'}">
                   Add New <i class="fas fa-plus"></i>
                   </b-button>
                 </b-col>

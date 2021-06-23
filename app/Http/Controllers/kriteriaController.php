@@ -62,13 +62,11 @@ class kriteriaController extends Controller
         return kriteria::findorFail($id);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function showkriteria($id)
+    {
+        return kriteria::where('kriteria',$id)->orderBy('sub_kriteria','asc')->get();
+    }
+
     public function update(Request $request, $id)
     {
         $this->validate($request, [
