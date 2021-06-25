@@ -21,7 +21,14 @@
                             <p>Home</p>
                         </router-link>
                     </li>
-                    <li class=nav-header>Master</li>
+                     <li class="nav-header">Admins</li>
+                    <li class="nav-item">
+                        <router-link  class="nav-link" exact :to="{name:'roles'}" >
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>Roles</p>
+                        </router-link>
+                    </li>
+                    <li class="nav-header">Master</li>
                     <li class="nav-item">
                         <router-link  class="nav-link" exact :to="{name:'karyawan'}" >
                             <i class="nav-icon fas fa-users"></i>

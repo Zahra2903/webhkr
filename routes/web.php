@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admins\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::view('/{any?}','layouts.vue')->where('any','.*');
+
+Route::prefix('roles')->name('roles.')->group(function() {
+    Route::get('/',[RoleController::class,'index'])->name('index');
+    Route::get('/update',[RoleController::class,'update'])->name('update');
+});
 /* Route::get('/', function () {
     return view('welcome');
 });

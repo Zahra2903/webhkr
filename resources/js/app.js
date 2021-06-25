@@ -12,17 +12,18 @@ try {
 
 } catch (e) {}
 
-import Vue from 'vue';
-import VueRouter from 'vue-router'; 
-import routes from './routes';
-import App from './layouts/App.vue';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import routes from './routes'
+import App from './layouts/App.vue'
 
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
-import VueSweetalert2 from 'vue-sweetalert2';
-import { Form, HasError, AlertError } from 'vform';
-import moment from "moment"; 
-import Vuelidate from 'vuelidate';
-import vSelect, { VueSelect } from 'vue-select';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import VueSweetalert2 from 'vue-sweetalert2'
+import { Form, HasError, AlertError } from 'vform'
+import moment from "moment"
+import Vuelidate from 'vuelidate'
+import vSelect, { VueSelect } from 'vue-select'
+
 
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -42,6 +43,7 @@ window.Form = Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 Vue.component('v-select', vSelect)
+
 
 
 Vue.use(VueRouter);

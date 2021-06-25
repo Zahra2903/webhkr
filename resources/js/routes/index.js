@@ -10,6 +10,7 @@ import UnitDetail from '../views/UnitDetail'
 import Penilaian from '../views/Penilaian'
 import PenilaianCreate from '../views/Penilaian/Create'
 import PenilaianDetail from '../views/PenilaianDetail'
+import Roles from '../views/Admins/Role'
 
 export default
 {
@@ -75,6 +76,12 @@ export default
             path:'/penilaian_detail',
             name:'penilaian_detail',
             component: PenilaianDetail,
+        },
+
+        {
+            path:'/roles',
+            name:'roles',
+            component: Roles,
         },
     ]
 }
